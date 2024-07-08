@@ -1,0 +1,17 @@
+.scrollremove::-webkit-scrollbar {
+    width: 1px;
+}
+
+.scrollremove::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(blue, red);
+    border-radius: 100px;
+}
+
+.scrollremove::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 100px;
+}
+
+.scrollremove::-webkit-scrollbar-corner {
+    display: none;
+}

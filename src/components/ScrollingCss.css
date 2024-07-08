@@ -1,0 +1,57 @@
+.scrollremove::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.scrollremove::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(blue, red);
+    border-radius: 100px;
+}
+
+.scrollremove::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 100px;
+}
+
+.scrollremove::-webkit-scrollbar-corner {
+    display: none;
+}
+.scrollline::-webkit-scrollbar {
+    width: 3px;
+    height: 0px;
+    margin-right: 50px;
+}
+
+.scrollline::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(blue, red);
+    border-radius: 100px;
+}
+
+.scrollline::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 100px;
+   
+}
+
+.scrollline::-webkit-scrollbar-corner {
+    display: none;
+}
+
+@keyframes glow {
+    0% {
+            border-color:red;
+        }
+    
+        50% {
+            border-color:transparent;
+        }
+    
+        100% {
+            border-color: red;
+        }
+}
+
+.glowdiv{
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    animation: glow .8s infinite linear;
+}
