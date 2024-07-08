@@ -24,7 +24,7 @@ function App() {
             <div>
               <img
                 className="w-[50px] rounded-lg"
-                src="./public/images/testify.jpg"
+                src="images/testify.jpg"
                 alt=""
               />
             </div>
@@ -64,7 +64,7 @@ function App() {
               >
                 <img
                   className="-z-10"
-                  src="./public/images/image.png"
+                  src="images/image.png"
                   alt=""
                 />
               {/* <SignUpComponent /> */}
