@@ -57,7 +57,7 @@ const AddtaskForm = ({ setShow, userDAta }) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full border-black z-50 bg-transparent backdrop-blur">
+    <div className="fixed top-0 left-0 flex justify-center items-center w-full h-full border-black z-50 bg-transparent backdrop-blur">
       <motion.form
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

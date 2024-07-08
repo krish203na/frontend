@@ -258,7 +258,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute max-h-[100vh] z-50 inset-0 flex items-center justify-center backdrop-blur"
+        className=" overflow-hidden fixed h-full z-50 inset-0 flex items-center justify-center backdrop-blur"
       >
         <motion.div
           initial={{ y: "-100vh" }}
