@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { context } from "../Dashboard";
-
 
 const ManagableTaskCard = ({ task, condition }) => {
   const [urgentTask, setUrgentTask] = useState({});
@@ -11,14 +10,16 @@ const ManagableTaskCard = ({ task, condition }) => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await axios.get(`https://backend-pgv8.onrender.com/task/${task}`);
+        const response = await axios.get(
+          `https://backend-pgv8.onrender.com/task/${task}`
+        );
         setUrgentTask(response.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchTask();
-  }, [urgentTask]);
+  }, [task]);
 
   if (condition) {
     if (urgentTask.taskpriority === "high")
@@ -30,7 +31,7 @@ const ManagableTaskCard = ({ task, condition }) => {
 
 export default ManagableTaskCard;
 
-const ManageTask = ({ urgentTask,glow }) => {
+const ManageTask = ({ urgentTask, glow }) => {
   //   return (
   //     <motion.div
   //       initial={{ opacity: 0 }}
@@ -84,15 +85,14 @@ const ManageTask = ({ urgentTask,glow }) => {
           taskscompleted: userData.taskscompleted + 1,
         }
       );
+      toast.success("Task completed successfully");
       fetchUserData();
       socket.emit("send_message", {
-          message: `${urgentTask.taskname} Task is Deleted`,
-        });
-        alert("Task completed successfully");
+        message: `${urgentTask.taskname} Task is Deleted`,
+      });
       //   toast.success("Task completed successfully");
       //   onClose();
     } catch (error) {
-      alert("error !!!!");
       toast.error("Error Completing task");
       console.error(error);
     }
@@ -104,7 +104,9 @@ const ManageTask = ({ urgentTask,glow }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={`bg-[#626dfb] ${glow ? "glowdiv": ""} relative text-wrap min-w-[24vw] h-[30vh] flex-grow flex-shrink rounded-lg p-3 text-white`}
+        className={`bg-[#626dfb] ${
+          glow ? "glowdiv" : ""
+        } relative text-wrap min-w-[24vw] h-[30vh] flex-grow flex-shrink rounded-lg p-3 text-white`}
         // className="bg-[#626dfb] glowdiv relative text-wrap min-w-[24vw] h-[30vh] flex-grow flex-shrink rounded-lg p-3 text-white"
       >
         <div className="flex justify-between max-w-[100%] max-h-[20%] overflow-hidden">
@@ -146,7 +148,7 @@ export { ManageTask };
 
 const TaskModal = ({ urgentTask, onClose }) => {
 
-    const [userData, setUserData, fetchUserData, socket] = useContext(context);
+  const [userData, setUserData, fetchUserData, socket] = useContext(context);
   const [taskName, setTaskName] = useState(urgentTask.taskname);
   const [taskDescription, setTaskDescription] = useState(
     urgentTask.taskdescription
@@ -168,15 +170,19 @@ const TaskModal = ({ urgentTask, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://backend-pgv8.onrender.com/task/update/${urgentTask._id}`, {
-        taskname: taskName,
-        taskdescription: taskDescription,
-        taskend: taskEnd,
-        taskcomments: comments,
-        taskcollaborators: collaborators,
-        taskpriority: taskPriority,
-        taskstatus: taskStatus,
-      });
+      await axios.put(
+        `https://backend-pgv8.onrender.com/task/update/${urgentTask._id}`,
+        {
+          taskname: taskName,
+          taskdescription: taskDescription,
+          taskend: taskEnd,
+          taskcomments: comments,
+          taskcollaborators: collaborators,
+          taskpriority: taskPriority,
+          taskstatus: taskStatus,
+        }
+      );
+      toast.success("Task added Successfully !");
       socket.emit("send_message", {
         message: `${taskName} this Task is Updated`,
       });
@@ -223,6 +229,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
           //  },
         }
       );
+      toast.success("Collaborator found");
       setSearchedUser(response.data);
       setShowCollaborator(true);
 
@@ -232,7 +239,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
       //    response.data._id,
       //  ]);
     } catch (error) {
-      alert("Collaborator not found");
+      toast.error("Collaborator not found");
     }
   };
 
@@ -384,7 +391,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
               </div>
             </div>
             {/* Add Collaborator Button */}
-            <div className="w-full ">
+            {/* <div className="w-full ">
               <div className="w-full p-3">
                 {collaborators.length > 0 && (
                   <div className="text-white">
@@ -404,10 +411,10 @@ const TaskModal = ({ urgentTask, onClose }) => {
                         )
                       })}
                     </div> */}
-                  </div>
+                  {/* </div>
                 )}
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */} 
             <div className="w-full">
               <div
                 className="bg-green-500 text-center cursor-pointer w-full hover:bg-green-700 duration-200 text-white font-bold py-1 px-3 rounded"
@@ -419,7 +426,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
             </div>
             <div className="flex gap-5 justify-center">
               <button
-                type="submit"
+                
                 className="bg-green-500 hover:bg-green-700 duration-200 text-white font-bold py-1 px-3 rounded"
               >
                 Submit
@@ -433,7 +440,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
               </button>
             </div>
           </form>
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </motion.div>
 
         {/* Collaborator Form */}

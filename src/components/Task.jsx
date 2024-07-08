@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import { motion } from 'framer-motion';
 import { context } from "../Dashboard";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Task = ({ urgentTask }) => {
 
@@ -26,11 +27,11 @@ const Task = ({ urgentTask }) => {
         socket.emit("send_message", {
           message: `${urgentTask.taskname} Task is Deleted`,
         });
-        alert("Task completed successfully");
+        toast.success("Task completed successfully");
         //   toast.success("Task completed successfully");
         //   onClose();
       } catch (error) {
-        alert(error);
+        toast.error(error);
         // toast.error("Error Completing task");
         console.error(error);
       }

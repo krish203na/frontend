@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      alert(data.message);
+      toast.info(data.message);
     });
   }, [socket]);
 

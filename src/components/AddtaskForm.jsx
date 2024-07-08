@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { context } from "../Dashboard";
 
 const AddtaskForm = ({ setShow, userDAta }) => {
@@ -17,7 +17,7 @@ const AddtaskForm = ({ setShow, userDAta }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!taskHeading || !taskDescription || !taskPriority || !taskDeadline) {
-      alert("Please fill in all required fields");
+      toast.warning("Please fill in all required fields");
       return;
     }
     // Handle form submission
@@ -39,10 +39,10 @@ const AddtaskForm = ({ setShow, userDAta }) => {
       socket.emit("send_message", {
         message: `${taskHeading} this Task is Created By ${userData.fullname}`,
       });
-      alert("Task Added Successfully !");
+      toast.success("Task Added Successfully !");
       fetchUserData();
     } catch (error) {
-      alert(error);
+      toast.error(error);
     }
     // Clear the form
     setTaskHeading("");
