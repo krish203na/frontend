@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export const context = React.createContext([]);
 import "./components/ScrollingCss.css"
 
-const socket = io.connect("");
+const socket = io.connect("https://backend-pgv8.onrender.com");
 
 
 const Dashboard = () => {
@@ -28,7 +28,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
       axios
-        .post("https://thunderous-bombolone-3f2d11.netlify.app//user/register", {
+        .post("https://thunderous-bombolone-3f2d11.netlify.app/user/register", {
           userid: user.id,
           username: user.username,
           email: user.primaryEmailAddress.emailAddress,
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`https://thunderous-bombolone-3f2d11.netlify.app//user/${user.id}`);
+      const response = await axios.get(`https://thunderous-bombolone-3f2d11.netlify.app/user/${user.id}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);

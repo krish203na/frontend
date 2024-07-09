@@ -10,12 +10,12 @@ const Task = ({ taskDetail }) => {
   const handleCompleteClick = async () => {
     try {
       const response = await axios.delete(
-        `https://thunderous-bombolone-3f2d11.netlify.app//task/delete/${taskDetail._id}`,
+        `https://thunderous-bombolone-3f2d11.netlify.app/task/delete/${taskDetail._id}`,
         {
         }
       );
       const response2 = await axios.put(
-        `https://thunderous-bombolone-3f2d11.netlify.app//user/update/${userData._id}`,
+        `https://thunderous-bombolone-3f2d11.netlify.app/user/update/${userData._id}`,
         {
           taskscompleted: userData.taskscompleted + 1,
         }

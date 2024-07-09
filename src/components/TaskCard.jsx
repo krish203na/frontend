@@ -12,7 +12,7 @@ const TaskCard = ({ task, urgent, type }) => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await axios.get(`https://thunderous-bombolone-3f2d11.netlify.app//task/${task}`);
+        const response = await axios.get(`https://thunderous-bombolone-3f2d11.netlify.app/task/${task}`);
 
         setUrgentTask(response.data);
       } catch (error) {

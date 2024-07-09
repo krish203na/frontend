@@ -19,7 +19,7 @@ const TaskDetails = ({
   const fetchuserData = async (owner) => {
     try {
       const response = await axios.get(
-        `https://thunderous-bombolone-3f2d11.netlify.app//user/id/${owner}`
+        `https://thunderous-bombolone-3f2d11.netlify.app/user/id/${owner}`
       );
       setTaskOwner(response.data);
       setCollab(response.data);
@@ -49,7 +49,7 @@ const TaskDetails = ({
 
     console.log(task.taskcollaborators);
     try {
-      await axios.put(`https://thunderous-bombolone-3f2d11.netlify.app//task/update/${task._id}`, {
+      await axios.put(`https://thunderous-bombolone-3f2d11.netlify.app/task/update/${task._id}`, {
         taskcollaborators: collaborators,
       });
       socket.emit("send_message", {

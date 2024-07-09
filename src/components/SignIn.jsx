@@ -9,7 +9,7 @@ const SignIn = () => {
     if (isSignedIn && user) {
       const saveUser = async () => {
         try {
-          const response = await fetch("https://thunderous-bombolone-3f2d11.netlify.app//user/register", {
+          const response = await fetch("https://thunderous-bombolone-3f2d11.netlify.app/user/register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
