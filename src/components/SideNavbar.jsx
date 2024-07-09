@@ -29,7 +29,6 @@ const SideNavbar = ({image}) => {
           alt="loading..."
         />
         <h1 className="font-semibold text-xl">{userData.fullname}</h1>
-        {/* <h1>{userData.tasks.length}</h1> */}
       </div>
       <div className="flex w-[60%] py-5 h-[40%] justify-start items-center gap-5 flex-col">
         <NavLink to={"/"}>
@@ -48,7 +47,6 @@ const SideNavbar = ({image}) => {
       </div>
       <div className="w-[100%] h-[10%] flex justify-center items-center">
         <div className="rounded-lg border-gray-500 h-[3vw] gap-2 w-[80%] flex justify-center items-center text-lg bg-[#e3e9ef]">
-          {/* <i class="fa-solid fa-right-from-bracket"></i> */}
           <UserButton showName={true}/>
         </div>
       </div>

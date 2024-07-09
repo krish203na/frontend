@@ -30,11 +30,6 @@ function App() {
             </div>
             <SignIn/>
           </motion.div>
-          {/* <img
-            className="w-[50px] absolute top-5 left-5 rounded-lg"
-            src="./public/images/testify.jpg"
-            alt=""
-          /> */}
           <div className="flex h-full items-center">
             <motion.div
               initial={{ x: -60, opacity: 0 }}
@@ -54,7 +49,6 @@ function App() {
               </p>
 
               <SignIn />
-              {/* <SignUp/> */}
             </motion.div>
             <motion.div
               initial={{ x: 60, opacity: 0 }}
@@ -67,7 +61,6 @@ function App() {
                   src="images/image.png"
                   alt=""
                 />
-              {/* <SignUpComponent /> */}
             </motion.div>
           </div>
         </div>

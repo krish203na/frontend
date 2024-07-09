@@ -117,7 +117,6 @@ const ManageTask = ({ urgentTask, glow, role }) => {
             >
               <i className="fa-solid fa-badge-check text-xl"></i>
               <h1 className="text-xs">done</h1>
-              {/* complete */}
             </button>
           </div>
         </div>
@@ -131,7 +130,6 @@ const ManageTask = ({ urgentTask, glow, role }) => {
 
 export { ManageTask };
 
-// TaskModal.jsx
 
 const TaskModal = ({ urgentTask, onClose }) => {
 
@@ -186,21 +184,6 @@ const TaskModal = ({ urgentTask, onClose }) => {
     setCollaboratorId(""); // Reset collaborator ID
     setSearchResults([]); // Reset search results
   };
-  // const [capturedUser, setCapturedUser] = useState()
-  //   const fetchCollaboratorIdToShow = async (collaboratorId) => {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://thunderous-bombolone-3f2d11.netlify.app//user/id/${collaboratorId}`
-  //       );
-  //       setCapturedUser(response.data.data)
-  //       console.log(response.data.fullname);
-  //       // return response.data.fullname;
-  //     } catch (error) {
-  //       alert(error);
-  //       console.log(error);
-  //     }
-  //     // return null
-  //   };
 
   const handleCollaboratorFormSubmit = async (e) => {
     e.preventDefault();
@@ -213,10 +196,6 @@ const TaskModal = ({ urgentTask, onClose }) => {
       setShowCollaborator(true);
 
       setSearchResults(response.data);
-      //  setCollaborators((prevCollaborators) => [
-      //    ...prevCollaborators,
-      //    response.data._id,
-      //  ]);
     } catch (error) {
       toast.error("Collaborator not found");
     }
@@ -369,31 +348,6 @@ const TaskModal = ({ urgentTask, onClose }) => {
                 <label htmlFor="completed">Completed</label>
               </div>
             </div>
-            {/* Add Collaborator Button */}
-            {/* <div className="w-full ">
-              <div className="w-full p-3">
-                {collaborators.length > 0 && (
-                  <div className="text-white">
-                    <label className="block text-sm font-medium">
-                      Existing Collaborators:
-                    </label>
-                    {/* <div className="flex flex-wrap gap-2 mt-1">
-                      {collaborators.map((collaboratorId, i) =>{
-                        fetchCollaboratorIdToShow(collaboratorId)
-                        return (
-                          <div
-                            key={`${collaboratorId}-${i}`}
-                            className="bg-gray-700 px-2 py-1 rounded-md text-sm"
-                          >
-                            <h1>{capturedUser}</h1>
-                          </div>
-                        )
-                      })}
-                    </div> */}
-            {/* </div>
-                )}
-              </div> */}
-            {/* </div> */}
             <div className="w-full">
               <div
                 className=" text-center cursor-pointer w-full bg-white hover:bg-green-500 hover:text-white duration-200 text-black font-bold py-1 px-3 rounded"
@@ -416,10 +370,8 @@ const TaskModal = ({ urgentTask, onClose }) => {
               </button>
             </div>
           </form>
-          {/* <ToastContainer /> */}
         </motion.div>
 
-        {/* Collaborator Form */}
         {isCollaboratorFormVisible && (
           <motion.div
             initial={{ y: "-100vh" }}
@@ -512,10 +464,8 @@ const RoleOnTask = ({task, userData, role}) => {
         title="Your are a creator of this task"
         className="bg-[#e3e9ef] text-center right-3 top-3 absolute inline-block z-10 duration-200 rounded-lg text-black p-1 px-2"
       >
-        {/* <div className="absolute top-0 w-11 h-10 bg-green-600"></div> */}
         <div>
           <i className="fa-solid fa-user"></i>
-          {/* <h1 className="text-xs">creator</h1> */}
         </div>
       </div>
     );
@@ -530,7 +480,6 @@ const RoleOnTask = ({task, userData, role}) => {
       >
         <div>
           <i className="fa-solid fa-user-group text-xl"></i>{" "}
-          {/* <h1 className="text-xs">Collaborator</h1> */}
         </div>
       </div>
     );
@@ -542,7 +491,6 @@ const RoleOnTask = ({task, userData, role}) => {
        >
          <div>
            <i className="fa-solid fa-eye"></i>
-           {/* <h1 className="text-xs">viewer</h1> */}
          </div>
        </div>
      );

@@ -19,9 +19,6 @@ const TaskPortal = () => {
     fetchUserData();
   };
 
-  // useEffect(() => {
-  //   fetchUserData();
-  // });
 
   const handleSearchForm = async (e) => {
     e.preventDefault();
@@ -65,36 +62,6 @@ const TaskPortal = () => {
         </div>
       </div>
 
-      {/* <div className="h-full">
-        <h1 className="text-2xl py-3 font-medium">High Priority Task</h1>
-        <div className="w-full p-[2vw] scrollremove rounded-lg bg-[#d2d8dd] max-h-[40vh] overflow-x-scroll flex gap-3 justify-start items-start border-black">
-          {showAddTaskForm && (
-            <AnimatePresence>
-              <AddtaskForm setShow={setShowAddTaskForm} userDAta={userData} />
-            </AnimatePresence>
-          )}
-          {
-            // userData == undefined? ((<h1>loading ......</h1>)):
-            Array.isArray(userData.tasks) ? (
-              !userData.tasks.length == 0 ? (
-                userData.tasks.map((e, i) => {
-                  return (
-                    <ManagableTaskCard
-                      key={`task${i}`}
-                      task={e}
-                      condition={true}
-                    />
-                  );
-                })
-              ) : (
-                <div>No Task Added Yet</div>
-              )
-            ) : (
-              <div>No Task Added Yet</div>
-            )
-          }
-        </div>
-      </div> */}
       <div className="h-full">
         <div className="flex justify-between items-center my-3">
           <h1 className="text-2xl py-3 px-5 font-medium ">All our Tasks</h1>
@@ -165,16 +132,10 @@ const TaskPortal = () => {
             </AnimatePresence>
           )}
           {
-            // userData == undefined? (()=>{fetchUserData(); return<h1>loading ......</h1>}):
             Array.isArray(userData.tasks) ? (
               !userData.tasks.length == 0 ? (
                 userData.tasks.map((e, i) => {
                   return (
-                    // <ManagableTaskCard
-                    //   key={`task${i}`}
-                    //   task={e}
-                    //   condition={false}
-                    // />
                     <TaskCard
                       key={`task${i}`}
                       task={e}

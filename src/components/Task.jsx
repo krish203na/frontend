@@ -12,8 +12,6 @@ const Task = ({ taskDetail }) => {
       const response = await axios.delete(
         `https://thunderous-bombolone-3f2d11.netlify.app//task/delete/${taskDetail._id}`,
         {
-          // taskstatus: "completed",
-          // taskpriority: "low",
         }
       );
       const response2 = await axios.put(
@@ -27,11 +25,8 @@ const Task = ({ taskDetail }) => {
         message: `${taskDetail.taskname} Task is Deleted`,
       });
       toast.success("Task completed successfully");
-      //   toast.success("Task completed successfully");
-      //   onClose();
     } catch (error) {
       toast.error(error);
-      // toast.error("Error Completing task");
       console.error(error);
     }
   };
@@ -57,7 +52,6 @@ const Task = ({ taskDetail }) => {
         >
           <i className="fa-solid fa-badge-check text-xl"></i>
           <h1>done</h1>
-          {/* complete */}
         </button>
       </div>
     </motion.div>

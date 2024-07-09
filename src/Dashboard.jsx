@@ -17,11 +17,9 @@ const socket = io.connect("");
 
 const Dashboard = () => {
 
-  // useEffect(() => {
     socket.on("receive_message", (data) => {
       toast.info(data.message);
     });
-  // }, [socket]);
 
 
   const { isLoaded, isSignedIn, user } = useUser();
@@ -29,12 +27,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
-      //   console.log('User data:', user);
-      //   // Example of accessing user data
-      //   console.log('User ID:', user.id);
-      //   console.log('Email:', user.primaryEmailAddress.emailAddress);
-      //   console.log('Full Name:', user.fullName);
-      //   console.log('Username:', user.username);
       axios
         .post("https://thunderous-bombolone-3f2d11.netlify.app//user/register", {
           userid: user.id,
@@ -65,7 +57,6 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    // console.log(userData.tasks.length);
   }, [userData]);
 
   return (
