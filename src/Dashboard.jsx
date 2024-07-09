@@ -28,7 +28,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
       axios
-        .post("https://thunderous-bombolone-3f2d11.netlify.app/user/register", {
+        .post("https://backend-pgv8.onrender.com/user/register", {
           userid: user.id,
           username: user.username,
           email: user.primaryEmailAddress.emailAddress,
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`https://thunderous-bombolone-3f2d11.netlify.app/user/${user.id}`);
+      const response = await axios.get(`https://backend-pgv8.onrender.com/user/${user.id}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);

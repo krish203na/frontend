@@ -20,10 +20,10 @@ const ManageTask = ({ urgentTask, glow, role }) => {
   const handleCompleteClick = async () => {
     try {
       const response = await axios.delete(
-        `https://thunderous-bombolone-3f2d11.netlify.app/task/delete/${urgentTask._id}`
+        `https://backend-pgv8.onrender.com/task/delete/${urgentTask._id}`
       );
       const response2 = await axios.put(
-        `https://thunderous-bombolone-3f2d11.netlify.app/user/update/${userData._id}`,
+        `https://backend-pgv8.onrender.com/user/update/${userData._id}`,
         {
           taskscompleted: userData.taskscompleted + 1,
         }
@@ -155,7 +155,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://thunderous-bombolone-3f2d11.netlify.app/task/update/${urgentTask._id}`, {
+      await axios.put(`https://backend-pgv8.onrender.com/task/update/${urgentTask._id}`, {
         taskname: taskName,
         taskdescription: taskDescription,
         taskend: taskEnd,
@@ -189,7 +189,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `https://thunderous-bombolone-3f2d11.netlify.app/user/${collaboratorId}`
+        `https://backend-pgv8.onrender.com/user/${collaboratorId}`
       );
       toast.success("Collaborator found");
       setSearchedUser(response.data);

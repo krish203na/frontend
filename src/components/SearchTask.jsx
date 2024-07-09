@@ -8,7 +8,9 @@ const TaskSearch = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`/tasks/search/${searchQuery.trim()}`);
+      const response = await axios.get(
+        `https://backend-pgv8.onrender.com/tasks/search/${searchQuery.trim()}`
+      );
       setSearchResults(response.data);
     } catch (error) {
       console.error("Error searching tasks:", error);

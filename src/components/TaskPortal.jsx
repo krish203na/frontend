@@ -25,7 +25,7 @@ const TaskPortal = () => {
 
     try {
       const response = await axios.get(
-        `https://thunderous-bombolone-3f2d11.netlify.app/task/get/${searchedFor}`
+        `https://backend-pgv8.onrender.com/task/get/${searchedFor}`
       );
       setSearchResult(response.data);
       if (!response.data.length == 0) {
