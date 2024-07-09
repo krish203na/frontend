@@ -14,8 +14,6 @@ const DashPortal = () => {
    setShowAddTaskForm(true);
    fetchUserData()
   }
-   
-  
 
   return (
     <motion.div
@@ -42,30 +40,28 @@ const DashPortal = () => {
         </div>
       </div>
       <div className="h-full">
-        <h1 className="text-2xl py-3 font-medium">
-          What you should pay attention to
+        <div className="flex justify-between items-center ">
+        <h1 className="text-2xl py-3 px-5 font-medium bg-[#d2d8dd] inline rounded-t-lg">
+          What you should pay attention to (High priority tasks)
         </h1>
-        <div className="w-full p-[2vw] scrollremove rounded-lg bg-[#d2d8dd] max-h-[40vh] overflow-x-scroll flex gap-3 justify-start items-start border-black">
+        </div>
+        <div className="w-full p-[2vw] scrollremove rounded-tl-[0px] rounded-lg bg-[#d2d8dd] max-h-[40vh] overflow-x-scroll flex gap-3 justify-start items-start border-black">
           {showAddTaskForm && (
             <AnimatePresence>
-              <AddtaskForm setShow={setShowAddTaskForm} userDAta={userData} />
+              <AddtaskForm setShow={setShowAddTaskForm} />
             </AnimatePresence>
           )}
-          {(
-            Array.isArray(userData.tasks) ? (
-              !userData.tasks.length == 0 ? (
-                userData.tasks.map((e, i) => {
-                  return (
-                    <TaskCard key={`task${i}`} task={e} condition={true} />
-                  );
-                })
-              ) : (
-                <div>No Task Added Yet</div>
-              )
+          {Array.isArray(userData.tasks) ? (
+            !userData.tasks.length == 0 ? (
+              userData.tasks.map((e, i) => {
+                return <TaskCard key={`task${i}`} task={e} urgent={true} type={"normal"} />;
+              })
             ) : (
               <div>No Task Added Yet</div>
             )
-          ) }
+          ) : (
+            <div>No Task Added Yet</div>
+          )}
         </div>
         <div className="py-5 flex gap-5 w-full">
           <div className="flex flex-col flex-grow flex-shrink bg-[#d2d8dd] w-[10vw] rounded-lg p-[1vw] py-[2vw]">
@@ -79,9 +75,7 @@ const DashPortal = () => {
           <div className="flex flex-col flex-grow flex-shrink bg-[#d2d8dd] w-[10vw] rounded-lg p-[1vw] py-[2vw]">
             <h1 className="text-xl text-center">Total pending tasks</h1>
             <h1 className="text-5xl font-bold text-center">
-              {Array.isArray(userData.tasks)
-                ? userData.tasks.length
-                : 0}
+              {Array.isArray(userData.tasks) ? userData.tasks.length : 0}
             </h1>
           </div>
           <div className="flex flex-col flex-grow flex-shrink bg-[#d2d8dd] w-[10vw] rounded-lg p-[1vw] py-[2vw]">

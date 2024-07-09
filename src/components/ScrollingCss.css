@@ -1,10 +1,10 @@
 .scrollremove::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
+    width: 5px;
+    height: 3px;
 }
 
 .scrollremove::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(blue, red);
+    background-image: linear-gradient(white, white);
     border-radius: 100px;
 }
 

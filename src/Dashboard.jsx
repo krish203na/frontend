@@ -10,17 +10,18 @@ import DashPortal from "./components/DashPortal";
 import { Outlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 export const context = React.createContext([]);
+import "./components/ScrollingCss.css"
 
-const socket = io.connect("https://backend-pgv8.onrender.com/");
+const socket = io.connect("");
 
 
 const Dashboard = () => {
 
-  useEffect(() => {
+  // useEffect(() => {
     socket.on("receive_message", (data) => {
       toast.info(data.message);
     });
-  }, [socket]);
+  // }, [socket]);
 
 
   const { isLoaded, isSignedIn, user } = useUser();
@@ -35,7 +36,7 @@ const Dashboard = () => {
       //   console.log('Full Name:', user.fullName);
       //   console.log('Username:', user.username);
       axios
-        .post("https://backend-pgv8.onrender.com/user/register", {
+        .post("https://thunderous-bombolone-3f2d11.netlify.app//user/register", {
           userid: user.id,
           username: user.username,
           email: user.primaryEmailAddress.emailAddress,
@@ -49,7 +50,7 @@ const Dashboard = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`https://backend-pgv8.onrender.com/user/${user.id}`);
+      const response = await axios.get(`https://thunderous-bombolone-3f2d11.netlify.app//user/${user.id}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -70,7 +71,7 @@ const Dashboard = () => {
   return (
     <context.Provider value={[userData, setUserData, fetchUserData, socket]}>
       <AnimatePresence>
-        <div className="bg-[#e3e9ef] z-40 flex">
+        <div className="bg-gray-100 z-40 flex">
           <div className="lg:w-[18%] w-[25%]">
             <div className="lg:w-[18%] w-[25%] fixed">
               <SideNavbar user={userData} image={user.imageUrl} />
@@ -80,7 +81,7 @@ const Dashboard = () => {
             initial={{ x: 500 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.7 }}
-            className="lg:w-[82%] w-[75%] z-30 px-[3vw] py-[5vh]"
+            className="lg:w-[82%] w-[75%] scscrollremove z-30 px-[3vw] py-[5vh]"
           >
             <Outlet />
           </motion.div>

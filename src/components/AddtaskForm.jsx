@@ -1,10 +1,24 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { context } from "../Dashboard";
+import { z } from "zod";
 
-const AddtaskForm = ({ setShow, userDAta }) => {
+const taskSchema = z.object({
+  taskHeading: z
+    .string()
+    .min(1, "Task heading is required")
+    .max(50, "Task heading can be at most 50 characters"),
+  taskDescription: z.string().min(1, "Task description is required"),
+  taskPriority: z.enum(["high", "moderate", "low"], "Invalid task priority"),
+  taskDeadline: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Task deadline must be a valid date",
+  }),
+  taskMembers: z.string().optional(),
+});
+
+const AddtaskForm = ({ setShow }) => {
   const [userData, setUserData, fetchUserData, socket] = useContext(context);
 
   const [taskHeading, setTaskHeading] = useState("");
@@ -13,38 +27,53 @@ const AddtaskForm = ({ setShow, userDAta }) => {
   const [taskDeadline, setTaskDeadline] = useState("");
   const [taskMembers, setTaskMembers] = useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!taskHeading || !taskDescription || !taskPriority || !taskDeadline) {
-      toast.warning("Please fill in all required fields");
+
+    const formData = {
+      taskHeading,
+      taskDescription,
+      taskPriority,
+      taskDeadline,
+      taskMembers,
+    };
+
+    const validationResult = taskSchema.safeParse(formData);
+
+    if (!validationResult.success) {
+      validationResult.error.errors.forEach((error) => {
+        toast.error(error.message);
+      });
       return;
     }
-    // Handle form submission
+
     try {
-      const responce = await axios.post("https://backend-pgv8.onrender.com/task/make", {
-        taskid: `${taskHeading.substring(0, 4)}+${taskDescription.substring(
-          0,
-          4
-        )}+${userDAta.userid.substring(6, 11)}+${new Date().getTime()}`,
-        taskname: taskHeading,
-        taskdescription: taskDescription,
-        taskpriority: taskPriority,
-        taskstatus: "running",
-        taskend: taskDeadline,
-        taskowner: userDAta._id,
-      });
+      const response = await axios.post(
+        "https://thunderous-bombolone-3f2d11.netlify.app//task/make",
+        {
+          taskid: `${taskHeading.substring(0, 4)}+${taskDescription.substring(
+            0,
+            4
+          )}+${userData.userid.substring(6, 11)}+${new Date().getTime()}`,
+          taskname: taskHeading,
+          taskdescription: taskDescription,
+          taskpriority: taskPriority,
+          taskstatus: "running",
+          taskend: taskDeadline,
+          taskowner: userData._id,
+        }
+      );
 
       setShow(false);
       socket.emit("send_message", {
         message: `${taskHeading} this Task is Created By ${userData.fullname}`,
       });
-      toast.success("Task Added Successfully !");
+      toast.success("Task Added Successfully!");
       fetchUserData();
     } catch (error) {
-      toast.error(error);
+      toast.error(error.response.data.message || error.message);
     }
-    // Clear the form
+
     setTaskHeading("");
     setTaskDescription("");
     setTaskPriority("");
@@ -63,7 +92,7 @@ const AddtaskForm = ({ setShow, userDAta }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onSubmit={handleSubmit}
-        className="max-w-[40vw] z-50 left-[50%] gap-3 mx-auto text-white p-4 shadow-md rounded-lg w-[100%] max-h-[25vw] bg-[#626dfb]"
+        className="max-w-[40vw] z-50 left-[50%] gap-3 mx-auto text-white p-4 shadow-md rounded-lg w-[100%] max-h-[25vw] bg-[#212121]"
       >
         <div className="flex font-bold justify-between items-center">
           <h1 className="font-bold text-xl">Add Task</h1>
@@ -78,7 +107,7 @@ const AddtaskForm = ({ setShow, userDAta }) => {
               onClick={handleCancel}
               className="bg-white hover:bg-blue-700 text-blue-500 duration-500 hover:text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
-              cancel
+              Cancel
             </button>
           </div>
         </div>
@@ -89,7 +118,7 @@ const AddtaskForm = ({ setShow, userDAta }) => {
             placeholder="Task heading"
             value={taskHeading}
             onChange={(e) => setTaskHeading(e.target.value)}
-            className=" appearance-none border-b bg-transparent placeholder:text-white text-white rounded w-full py-2 px-3  leading-tight focus:outline-none "
+            className="appearance-none border-b bg-transparent placeholder:text-white text-white rounded w-full py-2 px-3 leading-tight focus:outline-none"
           />
         </div>
         <div className="mb-4">
@@ -101,7 +130,7 @@ const AddtaskForm = ({ setShow, userDAta }) => {
             className="appearance-none border-b rounded w-full py-2 px-3 bg-transparent placeholder:text-white text-white leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div className="mb-4 flex gap-2 justify-between ">
+        <div className="mb-4 flex gap-2 justify-between">
           <label className="block text-white text-sm font-bold mb-2">
             Task Priority
           </label>
@@ -157,38 +186,10 @@ const AddtaskForm = ({ setShow, userDAta }) => {
             className="shadow appearance-none bg-transparent placeholder:text-white text-white border-b rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        {/* <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="taskMembers"
-          >
-            Add Members (Optional)
-          </label>
-          <input
-            type="text"
-            id="taskMembers"
-            value={taskMembers}
-            onChange={(e) => setTaskMembers(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div> */}
-        {/* <div className="flex items-center justify-between">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Add Task
-          </button>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            cancel
-          </button>
-        </div> */}
       </motion.form>
     </div>
   );
 };
 
 export default AddtaskForm;
+
