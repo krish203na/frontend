@@ -69,7 +69,7 @@ const AddtaskForm = ({ setShow }) => {
         message: `${taskHeading} this Task is Created By ${userData.fullname}`,
       });
       toast.success("Task Added Successfully!");
-      fetchUserData();
+      // fetchUserData();
     } catch (error) {
       toast.error(error.response.data.message || error.message);
     }
