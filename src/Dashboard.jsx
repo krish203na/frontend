@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`https://backend-pgv8.onrender.com/user/${user.id}`);
+      const response = await axios.get(`https://backend-pgv8.onrender.com/user/id/${user.id}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
