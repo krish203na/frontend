@@ -38,7 +38,7 @@ const Dashboard = () => {
           console.log(error);
         });
     }
-  }, []);
+  }, [,isLoaded, isSignedIn, user]);
 
   const fetchUserData = async () => {
     try {
