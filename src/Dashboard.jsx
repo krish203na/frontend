@@ -68,7 +68,7 @@ const Dashboard = () => {
   };
   useEffect(() => {
     fetchUserData();
-  }, [isLoaded, isSignedIn, user]);
+  }, [, user]);
 
   if (!isLoaded || !isSignedIn) {
     return <div>Loading...</div>;
