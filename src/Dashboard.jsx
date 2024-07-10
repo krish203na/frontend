@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { UserButton, useUser } from "@clerk/clerk-react";
+import { UserButton, useUser, useClerk } from "@clerk/clerk-react";
 import axios from "axios";
 import { useState } from "react";
 import { io } from "socket.io-client";
@@ -10,39 +10,57 @@ import DashPortal from "./components/DashPortal";
 import { Outlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 export const context = React.createContext([]);
-import "./components/ScrollingCss.css"
+import "./components/ScrollingCss.css";
 
 const socket = io.connect("https://backend-pgv8.onrender.com");
 
-
 const Dashboard = () => {
+  socket.on("receive_message", (data) => {
+    toast.info(data.message);
+  });
 
-    socket.on("receive_message", (data) => {
-      toast.info(data.message);
-    });
-
-
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isLoaded, isSignedIn } = useUser();
+  const { user } = useClerk();
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    if (isLoaded && isSignedIn && user) {
-      axios
-        .post("https://backend-pgv8.onrender.com/user/register", {
-          userid: user.id,
+    const saveUser = async () => {
+      try {
+        await axios.post("https://backend-pgv8.onrender.com/user/register", {
+          userId: user.id,
           username: user.username,
           email: user.primaryEmailAddress.emailAddress,
-          fullname: user.fullName,
-        })
-        .catch(function (error) {
-          console.log(error);
+          fullName: user.fullName,
+          // lastName: user.lastName,
         });
-    }
-  }, [,isLoaded, isSignedIn, user]);
+      } catch (error) {
+        toast.error("user data not saved");
+      }
+    };
+
+    saveUser();
+  }, [, user]);
+
+  // useEffect(() => {
+  //   if (isLoaded && isSignedIn && user) {
+  //     axios
+  //       .post("https://backend-pgv8.onrender.com/user/register", {
+  //         userid: user.id,
+  //         username: user.username,
+  //         email: user.primaryEmailAddress.emailAddress,
+  //         fullname: user.fullName,
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [, user]);
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`https://backend-pgv8.onrender.com/user/id/${user.id}`);
+      const response = await axios.get(
+        `https://backend-pgv8.onrender.com/user/id/${user.id}`
+      );
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -56,8 +74,7 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
-  useEffect(() => {
-  }, [userData]);
+  useEffect(() => {}, [userData]);
 
   return (
     <context.Provider value={[userData, setUserData, fetchUserData, socket]}>
