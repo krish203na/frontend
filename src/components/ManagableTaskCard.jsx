@@ -68,20 +68,29 @@ const ManageTask = ({ urgentTask, glow, role }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={handleClick}
+        // onClick={handleClick}
         className={`bg-[#39393b] ${
           glow ? "glowdiv" : ""
         } relative text-wrap truncate min-w-[20vw] lg:max-w-[50%] max-w-[80%] h-[100%] flex-grow flex-shrink rounded-lg p-3 text-white`}
       >
         <div className="flex truncate text-wrap justify-between max-w-[100%] max-h-[20%] overflow-">
+          <div
+            onClick={handleClick}
+            title="see task info"
+            className="bg-[#e3e9ef] text-center z-10 duration-200 rounded-lg text-black p-1 px-2"
+          >
+            <div>
+              <i className="fa-solid fa-info"></i>
+            </div>
+          </div>
           <h1
             title={urgentTask.taskname}
             className="text-xl w-[80%] truncate px-3 font-bold uppercase text-ellipsis"
           >
             {urgentTask.taskname}
           </h1>
-          <RoleOnTask userData={userData} task={urgentTask} role={role} />
 
+          <RoleOnTask userData={userData} task={urgentTask} role={role} />
         </div>
         <p className="h-[50%] max-h-[15vh] min-h-[15vh] truncate text-wrap text-ellipsis w-[80%] p-2 px-3 text-gray-300 scrollremove">
           {urgentTask.taskdescription}
@@ -464,6 +473,7 @@ const RoleOnTask = ({task, userData, role}) => {
         title="Your are a creator of this task"
         className="bg-[#e3e9ef] text-center right-3 top-3 absolute inline-block z-10 duration-200 rounded-lg text-black p-1 px-2"
       >
+
         <div>
           <i className="fa-solid fa-user"></i>
         </div>
