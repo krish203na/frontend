@@ -22,7 +22,7 @@ const TaskDetails = ({
         `https://backend-pgv8.onrender.com/user/id/${owner}`
       );
       setTaskOwner(response.data);
-      setCollab(response.data);
+      setCollab(response.data.taskcollaborators);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
