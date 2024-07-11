@@ -15,10 +15,10 @@ import "./components/ScrollingCss.css";
 
 const Dashboard = (socket) => {
 
-
+console.log(socket)
     socket.on("receive_message", (data) => {
       toast.info(data.message);
-      console.log("recieved msg")
+      console.log("recieved msg");
     });
 
   const { isLoaded, isSignedIn } = useUser();
