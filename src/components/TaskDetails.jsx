@@ -37,17 +37,19 @@ const TaskDetails = ({
 
     if (!collab.some((collaborator) => collaborator === userData._id)) {
       setCollab((prevCollaborators)=>[...prevCollaborators,userData._id]) 
-      setCollaborators(collab);
+      // setCollaborators(collab);
       
       try {
-        await axios.put(`https://backend-pgv8.onrender.com/task/update/${task._id}`, {
-          taskcollaborators: collaborators,
-        });
+        await axios.put(
+          `https://backend-pgv8.onrender.com/task/update/${task._id}`,
+          {
+            taskcollaborators: collab,
+          }
+        );
         socket.emit("send_message", {
           message: `${task.taskName} this Task is Updated by ${userData.fullname}`,
         });
         toast.success("Task updated successfully!");
-        console.log("added")
       } catch (error) {
         toast.error(error);
         console.error("error");
