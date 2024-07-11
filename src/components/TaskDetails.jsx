@@ -32,30 +32,26 @@ const TaskDetails = ({
     fetchuserData(task.taskowner);
   }, []);
 
-  const handleSubmit = async () => {
-    console.log(task.taskcollaborators);
-    console.log(collaborators);
+  const handleSubmit = async () => {re
     
 
     if (!collab.some((collaborator) => collaborator === userData._id)) {
-      const updatedCollaborators = [...task.taskcollaborators, task.taskowner];
-      setCollaborators(updatedCollaborators);
-      console.log(updatedCollaborators);
-    }
-
-    console.log(task.taskcollaborators);
-    try {
-      await axios.put(`https://backend-pgv8.onrender.com/task/update/${task._id}`, {
-        taskcollaborators: collaborators,
-      });
-      socket.emit("send_message", {
-        message: `${task.taskName} this Task is Updated by ${userData.fullname}`,
-      });
-      toast.success("Task updated successfully!");
-      console.log("added")
-    } catch (error) {
-      toast.error(error);
-      console.error("error");
+      setCollab((prevCollaborators)=>[...prevCollaborators,userData._id]) 
+      setCollaborators(collab);
+      
+      try {
+        await axios.put(`https://backend-pgv8.onrender.com/task/update/${task._id}`, {
+          taskcollaborators: collaborators,
+        });
+        socket.emit("send_message", {
+          message: `${task.taskName} this Task is Updated by ${userData.fullname}`,
+        });
+        toast.success("Task updated successfully!");
+        console.log("added")
+      } catch (error) {
+        toast.error(error);
+        console.error("error");
+      }
     }
   };
 
