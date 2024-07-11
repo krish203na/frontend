@@ -8,10 +8,8 @@ import {
 } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
 import SignIn from "./components/SignIn";
-import { io } from "socket.io-client";
 import Dashboard from "./Dashboard";
 
-const socket = io.connect("https://backend-pgv8.onrender.com");
 
 function App() {
   return (
@@ -65,7 +63,7 @@ function App() {
         </div>
       </SignedOut>
       <SignedIn>
-        <Dashboard socket={socket} />
+        <Dashboard />
       </SignedIn>
     </>
   );

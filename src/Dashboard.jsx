@@ -12,8 +12,10 @@ import { AnimatePresence, motion } from "framer-motion";
 export const context = React.createContext([]);
 import "./components/ScrollingCss.css";
 
+const socket = io.connect("https://backend-pgv8.onrender.com");
 
-const Dashboard = (socket) => {
+
+const Dashboard = () => {
 
 console.log(socket)
     socket.on("receive_message", (data) => {
