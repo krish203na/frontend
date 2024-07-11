@@ -110,7 +110,7 @@ const ManageTask = ({ urgentTask, glow, role }) => {
             <p>{`end date-: ${urgentTask.taskend}`}</p>
           </div>
           <div className="flex gap-3">
-            <button
+            {/* <button
               onClick={handleEditClick}
               title="Edit"
               className="bg-[#e3e9ef] hover:bg-blue-700 duration-200 hover:text-white rounded-lg text-black p-1 px-2"
@@ -126,7 +126,52 @@ const ManageTask = ({ urgentTask, glow, role }) => {
             >
               <i className="fa-solid fa-badge-check text-xl"></i>
               <h1 className="text-xs">done</h1>
-            </button>
+            </button> */}
+            {role === "owner" && (
+              <div className="flex gap-5">
+                <button
+                  onClick={handleEditClick}
+                  title="Edit"
+                  className="bg-[#e3e9ef] hover:bg-blue-700 duration-200 hover:text-white rounded-lg text-black p-2 px-3"
+                >
+                  <div>
+                    <i className="fa-solid fa-pen text-3xl"></i>
+                    <h1 className="text-lg">edit</h1>
+                  </div>
+                </button>
+                <button
+                  onClick={() => (handleCompleteClick(), closeDetail())}
+                  className="bg-[#e3e9ef] hover:bg-green-500 duration-200 hover:text-white rounded-lg text-black p-1 px-2"
+                >
+                  <i className="fa-solid fa-badge-check text-3xl"></i>
+                  <h1 className="text-lg">done</h1>
+                </button>
+              </div>
+            )}
+            {role === "collaborator" && (
+              <button
+                onClick={handleEditClick}
+                title="Edit"
+                className="bg-[#e3e9ef] hover:bg-blue-700 duration-200 hover:text-white rounded-lg text-black p-2 px-3"
+              >
+                <div>
+                  <i className="fa-solid fa-pen text-3xl"></i>
+                  <h1 className="text-lg">edit</h1>
+                </div>
+              </button>
+            )}
+            {/* {role === "viewer" && (
+              <div
+               
+                title="Edit"
+                className="bg-[#e3e9ef] hover:bg-blue-700 duration-200 hover:text-white rounded-lg text-black p-2 px-3"
+              >
+                <div>
+                  <i className="fa-solid fa-user-group text-3xl"></i>
+                  <h1 className="text-lg">collaborate</h1>
+                </div>
+              </div>
+            )} */}
           </div>
         </div>
       </motion.div>
