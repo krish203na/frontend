@@ -177,6 +177,7 @@ const TaskModal = ({ urgentTask, onClose }) => {
       socket.emit("send_message", {
         message: `${taskName} this Task is Updated by ${userData.fullname}`,
       });
+      fetchUserData();
       onClose();
     } catch (error) {
       toast.error(error);
