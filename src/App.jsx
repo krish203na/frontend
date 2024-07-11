@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 import SignIn from "./components/SignIn";
 import Dashboard from "./Dashboard";
 
+const socket = io.connect("https://backend-pgv8.onrender.com");
+
 function App() {
   return (
     <>
@@ -28,7 +30,7 @@ function App() {
                 alt=""
               />
             </div>
-            <SignIn/>
+            <SignIn />
           </motion.div>
           <div className="flex h-full items-center">
             <motion.div
@@ -55,18 +57,14 @@ function App() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="w-[60%] shadow-none flex justify-center items-center"
-              >
-                <img
-                  className="-z-10"
-                  src="images/image.png"
-                  alt=""
-                />
+            >
+              <img className="-z-10" src="images/image.png" alt="" />
             </motion.div>
           </div>
         </div>
       </SignedOut>
       <SignedIn>
-        <Dashboard />
+        <Dashboard socket={socket} />
       </SignedIn>
     </>
   );

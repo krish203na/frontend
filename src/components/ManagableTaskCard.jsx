@@ -31,7 +31,7 @@ const ManageTask = ({ urgentTask, glow, role }) => {
       toast.success("Task completed successfully");
       fetchUserData();
       socket.emit("send_message", {
-        message: `${urgentTask.taskname} Task is Deleted`,
+        message: `${urgentTask.taskname} Task is Completed`,
       });
     } catch (error) {
       toast.error("Error Completing task");
