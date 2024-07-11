@@ -13,7 +13,7 @@ const TaskDetails = ({
 }) => {
   const [userData, setUserData, fetchUserData, socket] = useContext(context);
   const [taskOwner, setTaskOwner] = useState({});
-  const [collab, setCollab] = useState({});
+  const [collab, setCollab] = useState(task.taskcollaborators);
   const [collaborators, setCollaborators] = useState([]);
 
   const fetchuserData = async (owner) => {
@@ -22,7 +22,7 @@ const TaskDetails = ({
         `https://backend-pgv8.onrender.com/user/id/${owner}`
       );
       setTaskOwner(response.data);
-      setCollab(response.data.taskcollaborators);
+      
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
