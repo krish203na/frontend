@@ -17,6 +17,7 @@ const socket = io.connect("https://backend-pgv8.onrender.com");
 const Dashboard = () => {
   socket.on("receive_message", (data) => {
     toast.info(data.message);
+    console.log("recieved msg")
   });
 
   const { isLoaded, isSignedIn } = useUser();

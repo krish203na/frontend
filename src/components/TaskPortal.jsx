@@ -16,7 +16,7 @@ const TaskPortal = () => {
 
   const addTaskHandler = () => {
     setShowAddTaskForm(true);
-    fetchUserData();
+    // fetchUserData();
   };
 
 

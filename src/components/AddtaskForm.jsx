@@ -19,6 +19,7 @@ const taskSchema = z.object({
 });
 
 const AddtaskForm = ({ setShow }) => {
+
   const [userData, setUserData, fetchUserData, socket] = useContext(context);
 
   const [taskHeading, setTaskHeading] = useState("");
@@ -68,6 +69,8 @@ const AddtaskForm = ({ setShow }) => {
       socket.emit("send_message", {
         message: `${taskHeading} this Task is Created By ${userData.fullname}`,
       });
+      console.log("brodcasted msg")
+      fetchUserData()
       toast.success("Task Added Successfully!");
       // fetchUserData();
     } catch (error) {
