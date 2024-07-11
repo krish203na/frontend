@@ -37,11 +37,7 @@ const TaskDetails = ({
     console.log(collaborators);
     
 
-    if (
-      !task.taskcollaborators.some(
-        (collaborator) => collaborator === userData._id
-      )
-    ) {
+    if (!collab.some((collaborator) => collaborator === userData._id)) {
       const updatedCollaborators = [...task.taskcollaborators, task.taskowner];
       setCollaborators(updatedCollaborators);
       console.log(updatedCollaborators);
