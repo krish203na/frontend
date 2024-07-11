@@ -32,7 +32,7 @@ const TaskDetails = ({
     fetchuserData(task.taskowner);
   }, []);
 
-  const handleSubmit = async () => {re
+  const handleSubmit = async () => {
     
 
     if (!collab.some((collaborator) => collaborator === userData._id)) {
