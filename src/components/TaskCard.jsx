@@ -12,7 +12,9 @@ const TaskCard = ({ task, urgent, type }) => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await axios.get(`https://backend-pgv8.onrender.com/task/${task}`);
+        const response = await axios.get(
+          `https://backend-pgv8.onrender.com/task/${task}`
+        );
 
         setUrgentTask(response.data);
       } catch (error) {
@@ -20,7 +22,7 @@ const TaskCard = ({ task, urgent, type }) => {
       }
     };
     fetchTask();
-  }, [task]);
+  }, [urgentTask]);
 
   if (urgent && type === "normal") {
     if (urgentTask.taskpriority === "high"){
