@@ -74,7 +74,7 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
-  useEffect(() => {}, [userData]);
+  useEffect(() => {toast.info("script run")}, [userData]);
 
   return (
     <context.Provider value={[userData, setUserData, fetchUserData, socket]}>
