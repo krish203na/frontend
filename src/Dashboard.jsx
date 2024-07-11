@@ -13,8 +13,10 @@ export const context = React.createContext([]);
 import "./components/ScrollingCss.css";
 
 const socket = io.connect("https://backend-pgv8.onrender.com");
+toast.info("i am connected")
 
 const Dashboard = () => {
+
   socket.on("receive_message", (data) => {
     toast.info(data.message);
     console.log("recieved msg")
