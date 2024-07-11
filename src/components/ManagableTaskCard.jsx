@@ -80,7 +80,7 @@ const ManageTask = ({ urgentTask, glow, role }) => {
             className="bg-[#e3e9ef] text-center z-10 duration-200 rounded-lg text-black p-1 px-2"
           >
             <div>
-              <i className="fa-solid fa-info"></i>
+              <i className="fa-solid fa-circle-info"></i>
             </div>
           </div>
           <h1
