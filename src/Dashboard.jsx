@@ -23,6 +23,18 @@ const Dashboard = () => {
   const { user } = useClerk();
   const [userData, setUserData] = useState({});
 
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(
+        `https://backend-pgv8.onrender.com/user/${user.id}`
+      );
+      setUserData(response.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  
   useEffect(() => {
     const saveUser = async () => {
       try {
@@ -32,7 +44,9 @@ const Dashboard = () => {
           email: user.primaryEmailAddress.emailAddress,
           fullName: user.fullName,
           // lastName: user.lastName,
-        });
+        }).then(()=>{
+          fetchUserData();
+        })
       } catch (error) {
         toast.error("user data not saved");
       }
@@ -40,6 +54,10 @@ const Dashboard = () => {
 
     saveUser();
   }, [, user]);
+  
+  // useEffect(() => {
+  //   fetchUserData();
+  // }, [, user]);
 
   // useEffect(() => {
   //   if (isLoaded && isSignedIn && user) {
@@ -55,26 +73,13 @@ const Dashboard = () => {
   //       });
   //   }
   // }, [, user]);
-
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        `https://backend-pgv8.onrender.com/user/${user.id}`
-      );
-      setUserData(response.data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-  useEffect(() => {
-    fetchUserData();
-  }, [, user]);
+toast.info("script run")
 
   if (!isLoaded || !isSignedIn) {
     return <div>Loading...</div>;
   }
 
-  useEffect(() => {toast.info("script run")}, [userData]);
+  // useEffect(() => {}, [userData]);
 
   return (
     <context.Provider value={[userData, setUserData, fetchUserData, socket]}>
