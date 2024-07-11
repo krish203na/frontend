@@ -15,13 +15,12 @@ import "./components/ScrollingCss.css";
 const socket = io.connect("https://backend-pgv8.onrender.com");
 
 
+socket.on("receive_message", (data) => {
+  toast.info(data.message);
+});
 const Dashboard = () => {
 
-console.log(socket)
-    socket.on("receive_message", (data) => {
-      toast.info(data.message);
-      console.log("recieved msg");
-    });
+// console.log(socket)
 
   const { isLoaded, isSignedIn } = useUser();
   const { user } = useClerk();
@@ -77,7 +76,6 @@ console.log(socket)
   //       });
   //   }
   // }, [, user]);
-toast.info("script run")
 
   if (!isLoaded || !isSignedIn) {
     return <div>Loading...</div>;
