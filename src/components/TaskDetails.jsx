@@ -126,7 +126,7 @@ const TaskDetails = ({
                   </div>
                 </button>
                 <button
-                  onClick={handleCompleteClick}
+                  onClick={()=>(handleCompleteClick,closeDetail)}
                   className="bg-[#e3e9ef] hover:bg-green-500 duration-200 hover:text-white rounded-lg text-black p-1 px-2"
                 >
                   <i className="fa-solid fa-badge-check text-3xl"></i>
